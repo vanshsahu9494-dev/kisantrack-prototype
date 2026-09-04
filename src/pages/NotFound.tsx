@@ -1,25 +1,26 @@
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router";
+import { Button } from "@/components/ui/button";
+import { Leaf } from "lucide-react";
 
 export default function NotFound() {
+  const navigate = useNavigate();
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      className="min-h-screen flex flex-col"
+      transition={{ duration: 0.4 }}
+      className="min-h-screen flex flex-col items-center justify-center bg-[#0a0d0b]"
     >
-
-      
-      {/* Main Content */}
-      <div className="flex-1 flex flex-col items-center justify-center">
-        <div className="max-w-5xl mx-auto relative px-4">
-          <div className="flex items-center justify-center min-h-[200px]">
-            <div className="text-center">
-              <h1 className="text-4xl font-bold text-gray-900 mb-4">404</h1>
-              <p className="text-lg text-gray-600">Page Not Found</p>
-            </div>
-          </div>
+      <div className="text-center">
+        <div className="w-14 h-14 bg-emerald-500/10 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-emerald-500/15">
+          <Leaf className="w-8 h-8 text-emerald-400" />
         </div>
+        <h1 className="text-5xl font-bold text-white tracking-tight mb-2 font-mono">404</h1>
+        <p className="text-sm text-zinc-500 mb-6">This page could not be found.</p>
+        <Button onClick={() => navigate("/")} className="bg-emerald-600 hover:bg-emerald-500 text-white">
+          Return to Home
+        </Button>
       </div>
     </motion.div>
   );

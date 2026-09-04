@@ -2,21 +2,19 @@ import { useDemo } from "@/lib/demo-store";
 import { useNavigate } from "react-router";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, CheckCircle2, Circle, Clock, MapPin, ArrowRight } from "lucide-react";
+import { ArrowLeft, CheckCircle2, Circle, Clock, MapPin } from "lucide-react";
 
 export default function TrackProcurement() {
-  const { getActiveBooking, centers } = useDemo();
+  const { getActiveBooking } = useDemo();
   const navigate = useNavigate();
   const booking = getActiveBooking();
 
   if (!booking) {
     return (
       <div className="max-w-lg mx-auto py-12 text-center">
-        <h2 className="text-lg font-bold text-emerald-900 mb-2">No Active Procurement</h2>
-        <p className="text-sm text-emerald-600/70 mb-4">Book a slot to start tracking your procurement.</p>
-        <Button onClick={() => navigate("/dashboard/book")} className="bg-emerald-600 hover:bg-emerald-700 text-white">
-          Book a Slot
-        </Button>
+        <h2 className="text-lg font-bold text-white mb-2">No Active Procurement</h2>
+        <p className="text-sm text-zinc-500 mb-4">Book a slot to start tracking your procurement journey.</p>
+        <Button onClick={() => navigate("/dashboard/book")} className="bg-emerald-600 hover:bg-emerald-500 text-white">Book a Slot</Button>
       </div>
     );
   }
@@ -34,39 +32,35 @@ export default function TrackProcurement() {
 
   return (
     <div className="max-w-lg mx-auto">
-      <button onClick={() => navigate(-1)} className="flex items-center gap-2 text-sm text-emerald-600 hover:text-emerald-800 mb-4">
+      <button onClick={() => navigate(-1)} className="flex items-center gap-2 text-sm text-zinc-400 hover:text-white mb-4 transition-colors">
         <ArrowLeft className="w-4 h-4" /> Back
       </button>
 
-      {/* Header card */}
-      <Card className="border-emerald-100 mb-6">
+      <Card className="bg-[#111512] border-white/5 mb-6">
         <CardContent className="p-5">
           <div className="flex items-center justify-between mb-3">
             <div>
-              <h2 className="text-sm text-emerald-600/70">Tracking Procurement</h2>
-              <p className="text-lg font-bold text-emerald-900">{booking.crop} • {booking.quantity} {booking.quantityUnit}</p>
+              <h2 className="text-sm text-zinc-500">Tracking Procurement</h2>
+              <p className="text-lg font-bold text-white">{booking.crop} · {booking.quantity} {booking.quantityUnit}</p>
             </div>
             <span className={`text-xs font-bold px-3 py-1 rounded-full ${
-              booking.status === "completed" ? "bg-emerald-100 text-emerald-700" :
-              booking.status === "processing" ? "bg-blue-100 text-blue-700" :
-              "bg-amber-100 text-amber-700"
+              booking.status === "completed" ? "bg-emerald-500/15 text-emerald-400" :
+              booking.status === "processing" ? "bg-blue-500/15 text-blue-400" :
+              "bg-amber-500/15 text-amber-400"
             }`}>
-              {booking.status === "completed" ? "Completed" :
-               booking.status === "processing" ? "In Progress" :
-               booking.status === "in_queue" ? "In Queue" : "Confirmed"}
+              {booking.status === "completed" ? "Completed" : booking.status === "processing" ? "In Progress" : "In Queue"}
             </span>
           </div>
-          <div className="flex items-center gap-4 text-xs text-emerald-600/70">
+          <div className="flex items-center gap-4 text-xs text-zinc-500">
             <span className="flex items-center gap-1"><MapPin className="w-3 h-3" />{booking.centerName}</span>
             <span className="flex items-center gap-1"><Clock className="w-3 h-3" />Token: {booking.tokenNumber}</span>
           </div>
         </CardContent>
       </Card>
 
-      {/* Timeline */}
-      <Card className="border-emerald-100">
+      <Card className="bg-[#111512] border-white/5">
         <CardContent className="p-5">
-          <h3 className="text-sm font-bold text-emerald-900 mb-5">Procurement Timeline</h3>
+          <h3 className="text-sm font-bold text-white mb-5">Procurement Timeline</h3>
           <div className="space-y-0">
             {steps.map((step, i) => (
               <div key={i} className="flex gap-4">
@@ -76,25 +70,21 @@ export default function TrackProcurement() {
                       <CheckCircle2 className="w-4 h-4 text-white" />
                     </div>
                   ) : i === steps.findIndex(s => !s.done) ? (
-                    <div className="w-7 h-7 rounded-full bg-amber-100 border-2 border-amber-400 flex items-center justify-center shrink-0">
+                    <div className="w-7 h-7 rounded-full bg-amber-500/15 border-2 border-amber-500/40 flex items-center justify-center shrink-0">
                       <div className="w-2.5 h-2.5 bg-amber-400 rounded-full animate-pulse" />
                     </div>
                   ) : (
-                    <div className="w-7 h-7 rounded-full bg-emerald-50 border-2 border-emerald-200 flex items-center justify-center shrink-0">
-                      <Circle className="w-3 h-3 text-emerald-300" />
+                    <div className="w-7 h-7 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
+                      <Circle className="w-3 h-3 text-zinc-600" />
                     </div>
                   )}
                   {i < steps.length - 1 && (
-                    <div className={`w-0.5 flex-1 min-h-[32px] ${step.done ? "bg-emerald-600" : "bg-emerald-200"}`} />
+                    <div className={`w-0.5 flex-1 min-h-[32px] ${step.done ? "bg-emerald-600" : "bg-white/10"}`} />
                   )}
                 </div>
                 <div className="pb-6 flex-1">
-                  <p className={`text-sm font-medium ${step.done ? "text-emerald-900" : "text-emerald-400"}`}>
-                    {step.label}
-                  </p>
-                  <p className={`text-xs ${step.done ? "text-emerald-600/70" : "text-emerald-300"}`}>
-                    {step.time}
-                  </p>
+                  <p className={`text-sm font-medium ${step.done ? "text-white" : "text-zinc-600"}`}>{step.label}</p>
+                  <p className={`text-xs ${step.done ? "text-zinc-500" : "text-zinc-700"}`}>{step.time}</p>
                 </div>
               </div>
             ))}
@@ -103,12 +93,8 @@ export default function TrackProcurement() {
       </Card>
 
       <div className="flex gap-3 mt-6">
-        <Button onClick={() => navigate("/dashboard/token")} className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white">
-          View Token
-        </Button>
-        <Button onClick={() => navigate("/dashboard")} variant="outline" className="flex-1 border-emerald-200 text-emerald-700">
-          Dashboard
-        </Button>
+        <Button onClick={() => navigate("/dashboard/token")} className="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white">View Token</Button>
+        <Button onClick={() => navigate("/dashboard")} variant="outline" className="flex-1 border-white/10 text-zinc-300 hover:bg-white/5">Dashboard</Button>
       </div>
     </div>
   );

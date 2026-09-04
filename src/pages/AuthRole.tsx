@@ -1,12 +1,12 @@
 import { useDemo, type UserRole } from "@/lib/demo-store";
 import { useNavigate } from "react-router";
 import { Card, CardContent } from "@/components/ui/card";
-import { Leaf, Tractor, Shield, ArrowRight } from "lucide-react";
+import { Leaf, Users, Shield, ArrowRight } from "lucide-react";
 
-const ROLES: { role: UserRole; label: string; desc: string; icon: typeof Leaf; color: string; path: string }[] = [
-  { role: "farmer", label: "Farmer", desc: "Book slots, track procurement, manage tokens", icon: Leaf, color: "from-emerald-500 to-green-600", path: "/dashboard" },
-  { role: "operator", label: "Operator", desc: "Manage tokens, process farmers, update queue", icon: Tractor, color: "from-emerald-600 to-teal-700", path: "/operator" },
-  { role: "admin", label: "District Admin", desc: "Monitor centres, analytics, reports", icon: Shield, color: "from-emerald-700 to-green-800", path: "/admin" },
+const ROLES: { role: UserRole; label: string; desc: string; icon: typeof Leaf; path: string }[] = [
+  { role: "farmer", label: "Farmer", desc: "Book procurement slots, receive tokens, and track your queue in real-time.", icon: Leaf, path: "/dashboard" },
+  { role: "operator", label: "Operator", desc: "Manage token queues, process farmers, and update procurement records.", icon: Users, path: "/operator" },
+  { role: "admin", label: "District Administrator", desc: "Monitor mandi operations, view analytics, and access performance reports.", icon: Shield, path: "/admin" },
 ];
 
 export default function AuthRole() {
@@ -19,36 +19,36 @@ export default function AuthRole() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#f0f7f2] via-white to-emerald-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-[#0a0d0b] flex items-center justify-center p-4">
       <div className="max-w-lg w-full">
         <div className="text-center mb-8">
-          <div className="w-14 h-14 bg-gradient-to-br from-emerald-600 to-green-700 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-emerald-200">
-            <Leaf className="w-8 h-8 text-white" />
+          <div className="w-14 h-14 bg-emerald-500/10 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-emerald-500/20">
+            <Leaf className="w-8 h-8 text-emerald-400" />
           </div>
-          <h1 className="text-2xl font-bold text-emerald-900">Welcome to KisanTrack</h1>
-          <p className="text-sm text-emerald-600/70 mt-2">Select your role to continue</p>
+          <h1 className="text-2xl font-bold text-white tracking-tight">KisanTrack Prototype</h1>
+          <p className="text-sm text-zinc-500 mt-2">Select a role to continue into the demo</p>
         </div>
 
         <div className="space-y-3">
           {ROLES.map(r => (
-            <Card key={r.role} className="border-emerald-100 cursor-pointer hover:shadow-lg hover:border-emerald-300 transition-all group"
+            <Card key={r.role} className="bg-[#111512] border-white/5 cursor-pointer hover:border-emerald-500/20 hover:bg-[#131815] transition-all group"
               onClick={() => handleSelect(r.role, r.path)}>
               <CardContent className="p-5 flex items-center gap-4">
-                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${r.color} flex items-center justify-center shadow-md group-hover:scale-110 transition-transform`}>
-                  <r.icon className="w-7 h-7 text-white" />
+                <div className="w-12 h-12 bg-emerald-500/10 rounded-xl flex items-center justify-center border border-emerald-500/10 group-hover:bg-emerald-500/15 transition-colors">
+                  <r.icon className="w-6 h-6 text-emerald-400" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-lg font-bold text-emerald-900">{r.label}</h3>
-                  <p className="text-xs text-emerald-600/70">{r.desc}</p>
+                  <h3 className="text-base font-bold text-white">{r.label}</h3>
+                  <p className="text-xs text-zinc-500 mt-0.5">{r.desc}</p>
                 </div>
-                <ArrowRight className="w-5 h-5 text-emerald-400 group-hover:text-emerald-600 group-hover:translate-x-1 transition-all" />
+                <ArrowRight className="w-5 h-5 text-zinc-600 group-hover:text-emerald-400 group-hover:translate-x-1 transition-all" />
               </CardContent>
             </Card>
           ))}
         </div>
 
-        <p className="text-center text-[10px] text-emerald-400 mt-8">
-          Smart Farmer Procurement & Queue Management Platform • SIH 2026
+        <p className="text-center text-[10px] text-zinc-700 mt-8">
+          Smart Farmer Procurement & Queue Management Platform — SIH 2026
         </p>
       </div>
     </div>

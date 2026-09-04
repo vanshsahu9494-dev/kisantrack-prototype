@@ -37,10 +37,10 @@ const AdminLayout = lazy(() => import("./layouts/AdminLayout.tsx"));
 
 function RouteLoading() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#f0f7f2]">
+    <div className="min-h-screen flex items-center justify-center bg-[#0a0d0b]">
       <div className="flex flex-col items-center gap-3">
-        <div className="w-10 h-10 border-3 border-emerald-200 border-t-emerald-600 rounded-full animate-spin" />
-        <span className="text-sm text-emerald-700 font-medium">Loading...</span>
+        <div className="w-10 h-10 border-2 border-white/10 border-t-emerald-500 rounded-full animate-spin" />
+        <span className="text-sm text-zinc-500 font-medium">Loading...</span>
       </div>
     </div>
   );
@@ -64,10 +64,10 @@ class RootErrorBoundary extends React.Component<
   render() {
     if (this.state.hasError) {
       return (
-        <div className="min-h-screen flex items-center justify-center bg-[#f0f7f2] p-6">
+        <div className="min-h-screen flex items-center justify-center bg-[#0a0d0b] p-6">
           <div className="max-w-lg text-center">
-            <p className="text-sm font-semibold text-emerald-800">Something went wrong</p>
-            <p className="mt-2 text-xs text-emerald-600/70 break-words">{this.state.message}</p>
+            <p className="text-sm font-semibold text-white">Something went wrong</p>
+            <p className="mt-2 text-xs text-zinc-500 break-words">{this.state.message}</p>
           </div>
         </div>
       );
